@@ -31,3 +31,4 @@ One lesson at a time. Do the practice problems before reading the solutions.
 ## Files
 - `lessons/L01-random-variables.md` — lesson text
 - `lessons/L01-solutions.md` — worked solutions (try the problems first)
+- `lessons/L01-debrief.md` — my error log from attempt 1, and the "where does n come from" rule
