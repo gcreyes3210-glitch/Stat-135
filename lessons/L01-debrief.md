@@ -100,3 +100,74 @@ Let X be 1 or 2, each with probability 1/2.
 
 Not equal. Expectation passes through linear functions (`aX + b`) ONLY --
 never through squares, reciprocals, logs, or square roots.
+
+---
+
+# Round 2 debrief
+
+## What worked
+n = 100, p = 0.2: got `E[X] = 20`, `Var(X) = 16`, `E[p̂] = 0.2` all correct.
+The "n appears when summing" rule is in.
+
+## Mistake 5: grabbing a formula instead of reading the problem
+
+Fair 4-sided die (values 1,2,3,4). I answered `E[X] = 0.25` and
+`Var = 3/16`. Those are `p` and `p(1-p)` with `p = 1/4` -- the **Bernoulli**
+formulas, applied to something that is not Bernoulli.
+
+**The gate:** `E = p` and `Var = p(1-p)` apply ONLY to a variable that takes
+the values 0 and 1. Nothing else. A 4-sided die takes values 1,2,3,4, so those
+formulas are simply not about it. The 1/4 in this problem is a *probability*,
+not a *value* -- I put the probability where the value belongs.
+
+Correct:
+
+    X:     1     2     3     4
+    P(X):  1/4   1/4   1/4   1/4      (sums to 1, good)
+
+    E[X]   = (1 + 2 + 3 + 4)/4    = 2.5
+    E[X^2] = (1 + 4 + 9 + 16)/4   = 7.5
+    Var(X) = 7.5 - 2.5^2 = 7.5 - 6.25 = 1.25
+
+## THE PROTOCOL (write all four lines, every time, no exceptions)
+
+1. Possible **values** of X -- write the row.
+2. **Probability** of each -- write the row. Confirm it sums to 1.
+3. `E[X] = sum x*p(x)`, `E[X^2] = sum x^2*p(x)`, `Var = E[X^2] - (E[X])^2`.
+4. **Sanity check:** is `E[X]` between the smallest and largest possible
+   value? Is `Var >= 0`?
+
+Step 4 would have killed the wrong answer instantly: X is somewhere in 1 to 4,
+so `E[X] = 0.25` is impossible on its face. No algebra needed.
+
+## Mistake 6: SD divides by n, variance divides by n^2
+
+I wrote `SD(phat) = 0.0004`. The answer is `0.04`. Looks like I took
+`SD(X) = 4` and divided by `n^2 = 10000` instead of by `n = 100`.
+
+    Var(aX) = a^2 Var(X)     -->  variance picks up the SQUARE
+    SD(aX)  = |a| SD(X)      -->  SD picks up just the factor
+
+With `phat = X/100`:
+
+    Var(phat) = 16 / 100^2 = 0.0016
+    SD(phat)  = sqrt(0.0016) = 0.04        or directly: SD(X)/n = 4/100 = 0.04
+
+Cross-check with the formula: `sqrt(p(1-p)/n) = sqrt(0.16/100) = 0.04`. Agrees.
+Meaning: a poll of 100 is typically off by about 4 percentage points.
+
+## Mistake 7: the 1/sqrt(n) rule
+
+Going from n = 100 to n = 10,000, I said SD shrinks by a factor of 1000.
+It shrinks by a factor of **10**.
+
+    n multiplied by 100  -->  SD divided by sqrt(100) = 10
+
+Verify with the actual numbers:
+
+    n = 100:     SD(phat) = sqrt(0.16/100)   = 0.04
+    n = 10,000:  SD(phat) = sqrt(0.16/10000) = 0.004
+
+0.04 to 0.004 is a factor of 10, not 1000. **Accuracy improves like the square
+root of the sample size, not like the sample size.** 100x the data buys 10x
+the precision. This is the most important single fact in Lesson 1.
