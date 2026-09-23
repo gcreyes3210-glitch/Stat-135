@@ -10,7 +10,7 @@ One lesson at a time. Do the practice problems before reading the solutions.
 ### Phase 0 — Stat 134 rebuild (the parts 135 actually uses)
 - [x] **L1** Random variables, expectation, variance
 - [x] **L2** Named distributions, the normal curve, LLN and the CLT
-- [ ] **L3** Joint distributions, covariance, conditional expectation
+- [x] **L3** Joint distributions, covariance, conditional expectation
 
 ### Phase 1 — Stat 135 proper
 - [ ] **L4** Ch. 7 — Survey sampling: SRS, estimating a mean/total, standard
@@ -55,3 +55,15 @@ One lesson at a time. Do the practice problems before reading the solutions.
 2. Write the row of **probabilities**. Confirm they sum to 1.
 3. Compute E[X], E[X^2], Var = E[X^2] - (E[X])^2.
 4. Sanity check: E[X] between min and max value? Var >= 0?
+
+## Lesson 3 additions
+
+    Cov(X,Y) = E[XY] - E[X]E[Y]          Cov(X,X) = Var(X)
+    Var(X +/- Y) = Var(X) + Var(Y) +/- 2Cov(X,Y)
+    Cov(aX+b, cY+d) = ac Cov(X,Y)
+    Corr = Cov(X,Y)/(SD(X) SD(Y)),  always in [-1, 1]
+
+    independent => Cov = 0,  but Cov = 0 does NOT => independent
+
+    SRS without replacement:  Cov(Xi,Xj) = -sigma^2/(N-1)
+    Var(Xbar) = (sigma^2/n) * (N-n)/(N-1)      <- fpc = (N-n)/(N-1)
